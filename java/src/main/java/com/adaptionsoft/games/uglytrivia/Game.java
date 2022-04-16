@@ -1,19 +1,38 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class Game {
-    List<String> players = new ArrayList<String>();
+class Questions {
+
+//    Map<QuestionCategory, String> questionMap = Map.of(
+//
+//    );
+    List<String> popQuestions = new ArrayList<>();
+    List<String> scienceQuestions = new ArrayList<>();
+    List<String> sportsQuestions = new ArrayList<>();
+    List<String> rockQuestions = new ArrayList<>();
+
+    public Questions() {
+        for (int i = 0; i < 50; i++) {
+            popQuestions.add("Pop Question " + i);
+            scienceQuestions.add(("Science Question " + i));
+            sportsQuestions.add(("Sports Question " + i));
+            rockQuestions.add("Rock Question " + i);
+        }
+    }
+}
+
+public class Game implements IGame {
+    List<String> players = new ArrayList<>();
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
-    List<String> popQuestions = new LinkedList<String>();
-    List<String> scienceQuestions = new LinkedList<String>();
-    List<String> sportsQuestions = new LinkedList<String>();
-    List<String> rockQuestions = new LinkedList<String>();
+    Questions questions = new Questions();
+    List<String> popQuestions = new LinkedList<>();
+    List<String> scienceQuestions = new LinkedList<>();
+    List<String> sportsQuestions = new LinkedList<>();
+    List<String> rockQuestions = new LinkedList<>();
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -120,15 +139,15 @@ public class Game {
 
     private String currentCategory() {
         if (places[currentPlayer] == 0) return "Pop";
-        if (places[currentPlayer] == 4) return "Pop";
-        if (places[currentPlayer] == 8) return "Pop";
-        if (places[currentPlayer] == 1) return "Science";
-        if (places[currentPlayer] == 5) return "Science";
-        if (places[currentPlayer] == 9) return "Science";
-        if (places[currentPlayer] == 2) return "Sports";
-        if (places[currentPlayer] == 6) return "Sports";
-        if (places[currentPlayer] == 10) return "Sports";
-        return "Rock";
+        else if (places[currentPlayer] == 4) return "Pop";
+        else if (places[currentPlayer] == 8) return "Pop";
+        else if (places[currentPlayer] == 1) return "Science";
+        else if (places[currentPlayer] == 5) return "Science";
+        else if (places[currentPlayer] == 9) return "Science";
+        else if (places[currentPlayer] == 2) return "Sports";
+        else if (places[currentPlayer] == 6) return "Sports";
+        else if (places[currentPlayer] == 10) return "Sports";
+        else return "Rock";
     }
 
     private boolean didPlayerWin() {
